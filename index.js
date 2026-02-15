@@ -34,8 +34,8 @@ app.get("/signature", (req, res) => {
   });
 });
 
-app.get("/image-url/:publicId", async (req, res) => {
-  const { publicId } = req.params;
+app.get("/image-url/*", async (req, res) => {
+  const publicId = req.params[0];
 
   const url = cloudinary.url(publicId, {
     type: "authenticated",
@@ -45,6 +45,7 @@ app.get("/image-url/:publicId", async (req, res) => {
 
   res.json({ url });
 });
+
 
 
 const PORT = process.env.PORT || 3000;
