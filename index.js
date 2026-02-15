@@ -34,8 +34,12 @@ app.get("/signature", (req, res) => {
   });
 });
 
-app.get("/image-url/*", async (req, res) => {
-  const publicId = req.params[0];
+app.get("/image-url", async (req, res) => {
+  const publicId = req.query.publicId;
+
+  if (!publicId) {
+    return res.status(400).json({ error: "publicId required" });
+  }
 
   const url = cloudinary.url(publicId, {
     type: "authenticated",
