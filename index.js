@@ -33,18 +33,18 @@ app.get("/signature", (req, res) => {
   });
 });
 
-// 🔐 Generate Signed URL untuk View
-app.get("/view-url", (req, res) => {
-  const { public_id } = req.query;
+app.get("/image-url/:publicId", async (req, res) => {
+  const { publicId } = req.params;
 
-  const url = cloudinary.url(public_id, {
+  const url = cloudinary.url(publicId, {
     type: "authenticated",
     sign_url: true,
-    expires_at: Math.floor(Date.now() / 1000) + 300, // 5 menit
+    secure: true,
   });
 
   res.json({ url });
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server running"));
