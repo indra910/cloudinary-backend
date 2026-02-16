@@ -21,7 +21,7 @@ app.get("/signature", (req, res) => {
     {
       timestamp,
       type: "authenticated",
-      folder: "jastip/pembayaran",
+      folder: "jastip",
     },
     process.env.API_SECRET
   );
